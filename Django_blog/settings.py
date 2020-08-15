@@ -122,4 +122,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Para cargar el formulario de registro con bootstrap y darle un mejor estilo.
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Una vez creado el formulario de ingreso (log in),
+#  se redirije a la pagina deseada al terminar de rellenarlo.
+LOGIN_REDIRECT_URL = 'home'
+
+# Para redirigir a la pagina log in, si el usuario no esta logeado. 
+# Es para proteger de que nadie entre al profile o posts de otras personas y modificarlos.
+LOGIN_URL = 'login'
+
+# LOGOUT_REDIRECT_URL = 'login'
