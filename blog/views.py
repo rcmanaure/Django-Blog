@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import Post
 # Importar la vistas genericas(class)
 from django.views.generic import ListView, DetailView,CreateView, UpdateView, DeleteView
 # Para verificar si esta logeado para crear post se importa el siguiente decorador,
 # para usar en una clase.
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
+# Se importa el model User para la pagination de los posts del usuario,
+# con el shorcut get_object_or_404 en arriba en shortcuts.
+from django.contrib.auth.models import User
 
 
 # def home(request):
@@ -25,6 +27,25 @@ class PostListView(ListView):
     context_object_name = 'posts'
     # Para ordenar por fecha los posts
     ordering = ['-date']
+    # Pagination de cuantos articulos mostrar
+    paginate_by = 4
+
+
+# Pagination de los post de los usarios solamente.
+class UserPostView(ListView):
+  
+    model = Post
+    # Con cual template va a mostrar
+    template_name = 'blog/user_posts.html'
+    context_object_name = 'posts'
+    # Pagination de cuantos articulos mostrar
+    paginate_by = 4
+
+    def get_queryset(self):
+        # Se obtiene al user si existe sino da un error 404
+        user =get_object_or_404(User, username=self.kwargs.get('username'))
+        # returna los posts del usuario y ordenado por fecha
+        return Post.objects.filter(autor=user).order_by('-date')
 
 class PostDetailView(DetailView):
     model = Post

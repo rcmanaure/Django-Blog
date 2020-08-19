@@ -9,7 +9,9 @@
         <img class="rounded-circle article-img" src="{{object.autor.profile.image.url}}">
         <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="#">{{ object.autor }}</a>
+             <!-- La siguiente linea es para activar los links de los usuarios en los posts y poder
+                entrar a sus posts -->
+            <a class="mr-2" href="{% url 'user-posts' object.autor.username%}">{{ object.autor }}</a>
             <small class="text-muted">{{ object.date|date:"d F, Y" }}</small>
             <!-- Para que muestre los botones de update y delete en el articulo o post -->
             {% if object.autor == user %}
