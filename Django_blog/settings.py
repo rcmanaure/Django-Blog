@@ -137,4 +137,10 @@ LOGIN_REDIRECT_URL = 'home'
 # Es para proteger de que nadie entre al profile o posts de otras personas y modificarlos.
 LOGIN_URL = 'login'
 
-# LOGOUT_REDIRECT_URL = 'login'
+#  Para enviar correos para confirmar el password reset
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_PASS')

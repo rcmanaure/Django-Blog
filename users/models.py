@@ -12,7 +12,7 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
     # Metodo para ajustar imagenes automaticamente.
-    def save(self):
+    def save(self, *args, **kwargs):
         super().save()
 
         # Declaramos la variable a trabajar.
